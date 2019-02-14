@@ -1,28 +1,141 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Firebase from 'firebase';
+import config from './config';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    Firebase.initializeApp(config.firebase);
+
+    this.state = {
+      players: []
+    }
   }
+
+  //write data to firebase
+  writeUserData = () => {
+    Firebase.database().ref('/').set(this.state);
+    console.log('DATA SAVED');
+  }
+  
+
+  //retreive data from firebase
+  getUserData = () => {
+    let ref = Firebase.database().ref('/');
+    ref.on('value', snapshot => {
+      const state = snapshot.val();
+      this.setState(state);
+    });
+    console.log('DATA RETRIEVED');
+  }
+  
+  //get data for the first time
+  componentDidMount() {
+    this.getUserData();
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    // check on previous state
+    // only write when it's different with the new state
+    if (prevState !== this.state) {
+      this.writeUserData();
+    }
+  }
+
+  render() {
+    const { players } = this.state;
+    return(
+      <div className="container">
+        <div className="row">
+          <div className='col-xl-12'>
+            <h1>Aerochallenge ScoreBoard</h1>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col-xl-12'>
+          { 
+            players
+            .map(player => 
+              <div key={player.uid} className="card float-left" style={{width: '18rem', marginRight: '1rem'}}>
+                <div className="card-body">
+                  <h5 className="card-title">{ player.name }</h5>
+                  <p className="card-text">{ player.role }</p>
+                  <button onClick={ () => this.removeData(player) } className="btn btn-link">Delete</button>
+                  <button onClick={ () => this.updateData(player) } className="btn btn-link">Edit</button>
+                </div>
+              </div>
+              )
+          } 
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col-xl-12'>
+            <h1>Add new player here</h1>
+            <form onSubmit={ this.handleSubmit }>
+              <div className="form-row">
+                <input type='hidden' ref='uid' />
+                <div className="form-group col-md-6">
+                  <label>Name</label>
+                  <input type="text" ref='name' className="form-control" placeholder="Name" />
+                </div>
+                <div className="form-group col-md-6">
+                  <label>Score</label>
+                  <input type="text" ref='role' className="form-control" placeholder="Score" />
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let name = this.refs.name.value;
+    let role = this.refs.role.value;
+    let uid = this.refs.uid.value;
+  
+    if (uid && name && role){
+      const { players } = this.state;
+      const devIndex = players.findIndex(data => {
+        return data.uid === uid 
+      });
+      players[devIndex].name = name;
+      players[devIndex].role = role;
+      this.setState({ players });
+    }
+    else if (name && role ) {
+      const uid = new Date().getTime().toString();
+      const { players } = this.state;
+      players.push({ uid, name, role })
+      this.setState({ players });
+    }
+  
+    this.refs.name.value = '';
+    this.refs.role.value = '';
+    this.refs.uid.value = '';
+  }
+  
+  removeData = (player) => {
+    const { players } = this.state;
+    const newState = players.filter(data => {
+      return data.uid !== player.uid;
+    });
+    this.setState({ players: newState });
+  }
+  
+  updateData = (player) => {
+    this.refs.uid.value = player.uid;
+    this.refs.name.value = player.name;
+    this.refs.role.value = player.role;
+  }  
+
 }
 
 export default App;
