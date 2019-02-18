@@ -46,32 +46,50 @@ class App extends React.Component {
 
   render() {
     const { players } = this.state;
+    const listPlayers = players.map(player =>
+        <div key={player.uid} className="card float-left" style={{width: '18rem', marginRight: '1rem'}}>
+        <div className="card-body">
+          <h5 className="card-title">{ player.name }</h5>
+          <p className="card-text">{ player.score }</p>
+          <button onClick={ () => this.removeData(player) } className="btn btn-link">Delete</button>
+          <button onClick={ () => this.updateData(player) } className="btn btn-link">Edit</button>
+        </div>
+      </div>
+      );
+      const listPLayerTable = players.map(player =>
+          <tr key={player.uid}>
+            <th scope="row">{player.name}</th>
+            <th>{player.score}</th>
+            <th>
+               <button onClick={ () => this.removeData(player) } className="btn btn-link">Delete</button>
+            </th>
+            <th>
+               <button onClick={ () => this.updateData(player) } className="btn btn-link">Edit</button>
+            </th>
+          </tr>
+        );
     return(
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <div className='col-xl-12'>
-            <h1>Aerochallenge ScoreBoard</h1>
+            <h1 align="center">Aerochallenge ScoreBoard</h1>
           </div>
         </div>
-
         <div className='row'>
-          <div className='col-xl-12'>
-          { 
-            players
-            .map(player => 
-              <div key={player.uid} className="card float-left" style={{width: '18rem', marginRight: '1rem'}}>
-                <div className="card-body">
-                  <h5 className="card-title">{ player.name }</h5>
-                  <p className="card-text">{ player.role }</p>
-                  <button onClick={ () => this.removeData(player) } className="btn btn-link">Delete</button>
-                  <button onClick={ () => this.updateData(player) } className="btn btn-link">Edit</button>
-                </div>
-              </div>
-              )
-          } 
-          </div>
+          <table className="table">
+          <thead>
+            <tr className="table-primary">
+              <th scope="col">Team Name</th>
+              <th scope="col">Score</th>
+              <th scope="col">function 1</th>
+              <th scope="col">function 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listPLayerTable}
+          </tbody>
+          </table>
         </div>
-
         <div className='row'>
           <div className='col-xl-12'>
             <h1>Add new player here</h1>
@@ -84,7 +102,7 @@ class App extends React.Component {
                 </div>
                 <div className="form-group col-md-6">
                   <label>Score</label>
-                  <input type="text" ref='role' className="form-control" placeholder="Score" />
+                  <input type="text" ref='score' className="form-control" placeholder="Score" />
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">Save</button>
@@ -98,27 +116,27 @@ class App extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let name = this.refs.name.value;
-    let role = this.refs.role.value;
+    let score = this.refs.score.value;
     let uid = this.refs.uid.value;
   
-    if (uid && name && role){
+    if (uid && name && score){
       const { players } = this.state;
       const devIndex = players.findIndex(data => {
         return data.uid === uid 
       });
       players[devIndex].name = name;
-      players[devIndex].role = role;
+      players[devIndex].score = score;
       this.setState({ players });
     }
-    else if (name && role ) {
+    else if (name && score ) {
       const uid = new Date().getTime().toString();
       const { players } = this.state;
-      players.push({ uid, name, role })
+      players.push({ uid, name, score })
       this.setState({ players });
     }
   
     this.refs.name.value = '';
-    this.refs.role.value = '';
+    this.refs.score.value = '';
     this.refs.uid.value = '';
   }
   
@@ -133,7 +151,7 @@ class App extends React.Component {
   updateData = (player) => {
     this.refs.uid.value = player.uid;
     this.refs.name.value = player.name;
-    this.refs.role.value = player.role;
+    this.refs.score.value = player.score;
   }  
 
 }
