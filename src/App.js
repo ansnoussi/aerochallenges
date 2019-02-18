@@ -56,7 +56,8 @@ class App extends React.Component {
         </div>
       </div>
       );
-      const listPLayerTable = players.map(player =>
+      const listPLayerTable = players.sort((a, b) => a.score < b.score)
+          .map(player =>
           <tr key={player.uid}>
             <th scope="row">{player.name}</th>
             <th>{player.score}</th>
