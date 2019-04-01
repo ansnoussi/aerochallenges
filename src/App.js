@@ -10,6 +10,7 @@ class App extends React.Component {
     Firebase.initializeApp(config.firebase);
     this.firstTime = true ;
     this.boardIsShown = true ;
+    this.lastPLayer = null ;
     this.state = {
       players: []
     }
@@ -43,6 +44,13 @@ class App extends React.Component {
     // only write when it's different with the new state
     if (prevState !== this.state) {
       this.writeUserData();
+      let ref = Firebase.database().ref('/players');
+      ref.orderByChild('uid')
+      .startAt(Date.now())
+      .limitToLast(1)
+      .on('child_added', snapshot => {
+      this.lastPLayer = snapshot.val();
+    });
       if(this.firstTime == true){
         this.firstTime = false ;
       }else{
@@ -117,7 +125,7 @@ class App extends React.Component {
   </div>
 
   :
-  <div><p>New player added</p></div>
+  <div><p>New player added: {this.lastPLayer.name}</p></div>
 
   ;
     return(
