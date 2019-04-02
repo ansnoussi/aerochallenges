@@ -59,7 +59,7 @@ class App extends React.Component {
         setTimeout(function(){
           this.boardIsShown = true; 
           this.forceUpdate(); 
-        }.bind(this), 3000);
+        }.bind(this), 5000);
       }
     }
   }
@@ -149,7 +149,7 @@ class App extends React.Component {
       this.setState({ players });
     }
     else if (name && score ) {
-      const uid = new Date().getTime().toString();
+      const uid = new Date().getTime();
       const { players } = this.state;
       players.push({ uid, name, score })
       this.setState({ players });
