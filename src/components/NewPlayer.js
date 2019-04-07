@@ -30,7 +30,7 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail>
-              <Image src="../assets/sample.png" alt="zoneImage" />
+              <Image src="../assets/porte.png" alt="zoneImage" />
             </Thumbnail>
             <Heading>
               <h3>Zone de départ</h3>
@@ -45,7 +45,7 @@ const templateTablet = `
     </Card>
   )
 
-  const BoolCard = ({ title, bool, points, imageUrl }) => (
+  const BoolCard = ({ title, bool, points, }) => (
     <Card>
       <Composition
         template={templateMobile}
@@ -59,7 +59,6 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail>
-              <Image src={imageUrl} alt={title} />
             </Thumbnail>
             <Heading>
               <h3>{title}</h3>
@@ -273,7 +272,6 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
             </Thumbnail>
             <Heading>
               <h3>Protection des hélices</h3>
@@ -302,7 +300,6 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
             </Thumbnail>
             <Heading>
               <h3>Diametre</h3>
