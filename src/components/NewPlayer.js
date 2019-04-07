@@ -30,7 +30,7 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail>
-              <Image src="../assets/porte.png" alt="zoneImage" />
+              <Image src="https://raw.githubusercontent.com/ansnoussi/aerochallenges/aerochallenge/src/assets/porte.png?token=AfspFj4Z-F94tQB2RmE9tjXIahD2HNEiks5cs4e7wA%3D%3D" alt="zoneImage" />
             </Thumbnail>
             <Heading>
               <h3>Zone de départ</h3>
@@ -115,7 +115,7 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
+             <Image src="https://raw.githubusercontent.com/ansnoussi/aerochallenges/aerochallenge/src/assets/colonne.png?token=AfspFvcN0w-jT4T4gZs8YqXOjIIuagWHks5cs4fvwA%3D%3D" alt="zigzag img" />
             </Thumbnail>
             <Heading>
               <h3>ZIGZAG</h3>
@@ -147,7 +147,7 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
+             <Image src="https://raw.githubusercontent.com/ansnoussi/aerochallenges/aerochallenge/src/assets/oqba.png?token=AfspFigtQbIepFm0_HCMfJAxSV-Rl86qks5cs4h2wA%3D%3D" alt="zigzag img" />
             </Thumbnail>
             <Heading>
               <h3>Mosquée Oqba</h3>
@@ -179,7 +179,7 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
+             <Image src="https://raw.githubusercontent.com/ansnoussi/aerochallenges/aerochallenge/src/assets/bassins.png?token=AfspFmIKCCAiTomwb46SNQ7O_yoX7Ectks5cs4hUwA%3D%3D" alt="zigzag img" />
             </Thumbnail>
             <Heading>
               <h3>Bassins aghlabides </h3>
@@ -209,7 +209,7 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
+             <Image src="https://raw.githubusercontent.com/ansnoussi/aerochallenges/aerochallenge/src/assets/muraille.png?token=AfspFlQ7eccrQu4Wv_ekjtXLJFHtV_nIks5cs4iLwA%3D%3D" alt="zigzag img" />
             </Thumbnail>
             <Heading>
               <h3>Muraille de Sfax</h3>
@@ -242,10 +242,10 @@ const templateTablet = `
         {({ Thumbnail, Heading, Actions }) => (
           <>
             <Thumbnail >
-             <Image src="../assets/sample.png" alt="zigzag img" />
+             <Image src="https://raw.githubusercontent.com/ansnoussi/aerochallenges/aerochallenge/src/assets/africa.png?token=AfspFgEQdyAP-eJReAl4gfPMP5bYuYsQks5cs4j_wA%3D%3D" alt="zigzag img" />
             </Thumbnail>
             <Heading>
-              <h3>Muraille de Sfax</h3>
+              <h3>Hotel Africa</h3>
               {(temps == 0)? null : <div> {<Text small >atterrir sur la zone d'arrivé dans {temps} seconds</Text>} </div>}
             </Heading>
             <Actions flex align="flex-end">
